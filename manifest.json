@@ -3,6 +3,11 @@
   "description": "Block Facebook posts by keyword",
   "manifest_version": 2,
   "version": "1.0",
+  "content_scripts": [{"js": [ "popup.html" ], "matches": [ "http://*/"]} ],
+  "permissions": [
+  	"storage",
+  	"tabs"
+  	],
   "browser_action": {
     "default_icon": "icon.png",
     "default_popup": "popup.html"

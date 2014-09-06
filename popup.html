@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Keywordk Management Popup</title>
+	<title>Keyword Management Popup</title>
+	<script type="text/javascript" src="keywords.js"></script>
 </head>
 
 <body>
@@ -17,8 +18,10 @@
 	</div>
 -->
 
-<form>
-	Keyword: <input type="text" name="keyword">
+<form id="inputbox" style="background-color:#E6E6FA">
+	Keyword: <input type="text" id="key" name="keyword"/> 
+	<input type="submit" value="Add"/>
+	<input type="checkbox" onChange="addCheckbox">This is test</br>
 </form>
 	
 </body>

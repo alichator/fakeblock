@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>Keyword Management Popup</title>
-	<script type="text/javascript" src="keywords.js"></script>
+	<script src="keywords.js"></script>
 </head>
 
 <body>
@@ -20,9 +20,10 @@
 
 <form id="inputbox" style="background-color:#E6E6FA">
 	Keyword: <input type="text" id="key" name="keyword"/> 
-	<input type="submit" value="Add"/>
-	<input type="checkbox" onChange="addCheckbox">This is test</br>
+	<input type="checkbox" onChange="addCheckbox()">This is test</br>
 </form>
+
+<button type="button" onClick="addCheckbox()">This is Dumb</button>
 	
 </body>
 </html>

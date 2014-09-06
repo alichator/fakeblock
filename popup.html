@@ -2,31 +2,27 @@
 <html>
 <head>
 	<title>Keyword Management Popup</title>
-	<!-- <script src="popup.js"></script> -->
+	<script type="text/javascript" src="keywords.js"></script>
 </head>
 
 <body>
-	
 <!--
 	<div id = "page" style = "width:250px;">
-		<div id = "header" style = "background-color: yellow;float:left;width:250;height:100px">
-		<font color="black";font size = "100px">Fake</font>
-		<br><br><br>
-		<div id = "panel" style = "background-color: blue;height:100px;width:250px;float:left;">
-	    <h1><a href="https://www.facebook.com">
-		<font color="white";font size = "100px";>Block!</font></a></h1>
-		</div>
-		
+	<div id = "header" style = "background-color: yellow;float:left;width:250;height:100px">
+	<font color="black";font size = "100px">Fake</font>
+	<br><br><br>
+	<div id = "panel" style = "background-color: blue;height:100px;width:250px;float:left;">
+    <h1><a href="https://www.facebook.com">
+	<font color="white";font size = "100px";>Block!</font></a></h1>
 	</div>
-
+	</div>
 -->
 
-<form>
-	Keyword: <input type="text" name="keyword">
+<form id="inputbox" style="background-color:#E6E6FA">
+	Keyword: <input type="text" id="key" name="keyword"/> 
+	<input type="submit" value="Add"/>
+	<input type="checkbox" onChange="addCheckbox">This is test</br>
 </form>
-
-
-
-
+	
 </body>
 </html>

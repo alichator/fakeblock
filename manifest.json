@@ -1,6 +1,6 @@
 {
   "name": "FakeBlock!",
-  "description": "Block Facebook posts by keyword"
+  "description": "Block Facebook posts by keyword",
   "manifest_version": 2,
   "version": "1.0",
   "description": "My first Chrome extension.",

@@ -12,41 +12,6 @@
 	
 // };
 var keywordContainer = [];
-chrome.storage.sync.get("keys", function(a) {
-	keywordContainer = a.keys;
-});
-
-<<<<<<< HEAD
-var keywordContainer = [];
-
-function addKeyword() {
-
-	var filter = document.createElement("input");
-	filter.setAttribute("type", "checkbox");
-	filter.setAttribute("checked", "true");
-	filter.setAttribute("value", document.getElementById("key").value);
-	
-	chrome.storage.sync.get("keywords", function(keywords){
-		filter.setAttribute("id", "word" + keywords.length);
-	});
-
-	//document.getElementById("main").innerHTML += "<input type='checkbox' checked='true' value=" + document.getElementById("key").value + "/>";
-
-	chrome.storage.sync.get("keywords", function(keywords) {
-		keywords[keywords.length] = filter;
-	})
-}
-
-function loadKeywords() {
-
-	chrome.storage.sync.get("keywords", function(keywords) {
-		for(var i = 0; i < keywords.length; ++i)
-		{
-			document.getElementById("main").appendChild(keywords[i]);
-=======
-for(var j=0; j>keywordContainer.length; j++) {
-	window.alert(keywordContainer[0].key)
-}
 
 function addKeyword() {
 
@@ -65,21 +30,20 @@ function addKeyword() {
 	}
 	document.getElementById("key").value = "";
 	
+	var repeat = false;
 	chrome.storage.sync.get("keys", function(a){
 		span.setAttribute("id", "word" + a.keys.length);
 		keywordContainer = a.keys;
-	});
+		keywordContainer.push({"key":span.innerText});
 
-	keywordContainer.push({"key":span.innerText});
-	console.log(keywordContainer);
+		chrome.storage.sync.set({
+			keys:keywordContainer
+		});
 
-	chrome.storage.sync.set({
-		keys:keywordContainer
-	}, function(){
-		console.log(keywordContainer);
 	});
 
 	document.getElementById("main").appendChild(span);
+	document.getElementById("main").appendChild(document.createElement("br"));
 }
 
 function loadKeywords() {
@@ -93,33 +57,14 @@ function loadKeywords() {
 			span.appendChild(check);
 			span.innerHTML += a.keys[i].key;
 			document.getElementById("main").appendChild(span);
->>>>>>> b1ae676490055a5e4f9cfe6f601e25e2979a4c98
+
+			document.getElementById("main").appendChild(document.createElement("br"));
 		}
 	});
 }
 
 document.addEventListener("DOMContentLoaded", function(){
-<<<<<<< HEAD
-	
-	chrome.storage.sync.set({"keywords": keywordContainer}, function(){
-		console.log("word" + 3);
-	});
 
-	//loadKeywords();
-
-	document.getElementById("inputbox").addEventListener("submit", function(){
-	 	//addKeyword();
-	// 	loadKeywords();
-	});
-
-	document.getElementById("key").addEventListener("keypress"), function(){
-		if(event.keyCode == 13)
-		{
-			//addKeyword();
-			window.alert("We good.");
-		}
-	}
-=======
 
 	/*var mine = "Hello";
 	var your = "World";
@@ -134,6 +79,9 @@ document.addEventListener("DOMContentLoaded", function(){
 	// 	{"key":"test"},
 	// 	{"key":"test2"}
 	// ];
+	chrome.storage.sync.get("keys", function(a) {
+		keywordContainer = a.keys;
+	});
 
 	loadKeywords();
 
@@ -146,13 +94,20 @@ document.addEventListener("DOMContentLoaded", function(){
 		addKeyword();
 	});
 
+	document.getElementById("key").addEventListener("keypress", function(){
+		if(event.keyCode == 13)
+		{
+			addKeyword();
+		}
+	});
+
 	document.getElementById("clear").addEventListener("click", function(){
 		keywordContainer = [];
 		chrome.storage.sync.set({
 			keys:keywordContainer
 		});
 		loadKeywords();
+		location.reload();
 	});
->>>>>>> b1ae676490055a5e4f9cfe6f601e25e2979a4c98
 
 });

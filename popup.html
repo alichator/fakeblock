@@ -1,7 +1,38 @@
 <!DOCTYPE html>
 <html>
+<head>
+	<title>Keyword Management Popup</title>
+	<script src="jquery-2.1.1.js"></script>
+	<script src="keywords.js"></script>
+
+	<style type="text/css">
+		div#inputbox {
+			padding: 15px;
+			box-shadow: inset 0 -1px 1px rgba(0,0,0,0.5), /*bottom internal shadow*/
+			inset 0 1px 1px rgba(255,255,255,1); /*top internal highlight*/
+		}
+
+		p.title {
+			margin:10px 0px;
+		}
+
+		div#main {
+			font-size: 17px;
+			padding: 5px 2px;
+			box-shadow: inset 0 -1px 1px rgba(0,0,0,0.5), /*bottom internal shadow*/
+			inset 0 1px 1px rgba(255,255,255,1); /*top internal highlight*/
+		}
+
+		div.checkKeys {
+			margin: 5px 0px;
+		}
+
+	</style>
+</head>
+
 <body>
-<div id = "page" style = "width:250px;">
+<!--
+	<div id = "page" style = "width:250px;">
 	<div id = "header" style = "background-color: yellow;float:left;width:250;height:100px">
 	<font color="black";font size = "100px">Fake</font>
 	<br><br><br>
@@ -9,8 +40,20 @@
     <h1><a href="https://www.facebook.com">
 	<font color="white";font size = "100px";>Blocks</font></a></h1>
 	</div>
-	
-	
+	</div>
+-->
+<p style="font-size:20px; font-weight:bold" class="title">Welcome to <FONT COLOR="#0000FF">Fake</FONT><FONT COLOR="#FFD700">Block!</FONT></p>
+<p style="font-size:15px; font-weight:bold" class="title">Filter all unwanted content by adding keywords below</p>
+
+<div id="inputbox" style="background-color:#E6E6FA">
+	Add Keyword: <input type="text" id="key" name="keyword"/> </br>
+	<button type="button" id = "sbox">Add</button> <button type="button" id="clear">Clear Search</button>
 </div>
+
+	
+<div id="main" style="background-color:#FFFACD">
+
+</div>
+
 </body>
 </html>

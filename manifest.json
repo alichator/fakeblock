@@ -4,7 +4,8 @@
   "manifest_version": 2,
   "version": "1.0",
   "permissions": [
-    "webNavigation"
+    "webNavigation",
+    "storage"
   ],
   "browser_action": {
     "default_icon": "icon.png",

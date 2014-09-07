@@ -92,4 +92,8 @@ document.addEventListener("DOMContentLoaded", function(){
 		location.reload();
 	});
 
+	document.body.addEventListener("click", function(){
+		chrome.extension.sendMessage({filter:"filter"});
+	});
+
 });

@@ -1,23 +1,18 @@
-// function addCheckbox() {
-// 		/*
-// 		var text = document.getElementById("keyword").value;
-// 		var filter = document.createElement("INPUT");
-// 		filter.setAttribute("type", "checkbox");
-// 		//filter.setAttribute("checked", "true");
-// 		document.body.appendChild(filter);
-// 		*/
-// 		var text = document.getElementById("key").value;
-// 		console.log(text);
-// 		document.body.appendChild(document.createElement("BUTTON"));
-	
-// };
 var keywordContainer = [];
 
 function addKeyword() {
 
 	var check = document.createElement("input");
 	check.setAttribute("type", "checkbox");
-	check.setAttribute("checked", "true");
+	check.setAttribute("checked", true);
+	// check.addEventListener("click", function(){
+	// 	var temp = a.keys;
+	// 	if(check.checked){
+	// 		temp[i].check = "true";
+	// 	}
+	// 	else temp[i].check = "false";
+	// 	chrome.storage.sync.set({keys:temp});
+	// });
 	var span = document.createElement("span");
 	span.appendChild(check);
 	if(document.getElementById("key").value != "")
@@ -34,8 +29,8 @@ function addKeyword() {
 	chrome.storage.sync.get("keys", function(a){
 		span.setAttribute("id", "word" + a.keys.length);
 		keywordContainer = a.keys;
-		keywordContainer.push({"key":span.innerText});
-
+		keywordContainer.push({"key":span.innerText,
+								"check":"true"});
 		chrome.storage.sync.set({
 			keys:keywordContainer
 		});
@@ -54,6 +49,17 @@ function loadKeywords() {
 			check.setAttribute("type", "checkbox");
 			check.setAttribute("id", "word" + i);
 			check.setAttribute("value", a.keys[i].key);
+			// check.addEventListener("click", function(){
+			// 	var temp = a.keys;
+			// 	if(check.checked){
+			// 		temp[i].check = "true";
+			// 	}
+			// 	else temp[i].check = "false";
+			// 	chrome.storage.sync.set({keys:temp});
+			// });
+			if(a.keys[i].check == "true"){
+				check.setAttribute("checked", true);
+			}
 			span.appendChild(check);
 			span.innerHTML += a.keys[i].key;
 			document.getElementById("main").appendChild(span);
@@ -64,24 +70,13 @@ function loadKeywords() {
 
 document.addEventListener("DOMContentLoaded", function(){
 
-	/*var mine = "Hello";
-	var your = "World";
-	chrome.storage.sync.set({
-		empList:employees,
-		keys:keywordContainer	
-	}, function(){
-		console.log(employees[0].firstName);
-	});*/
-
-	// keywordContainer = [
-	// 	{"key":"test"},
-	// 	{"key":"test2"}
-	// ];
 	chrome.storage.sync.get("keys", function(a) {
 		keywordContainer = a.keys;
 	});
 
 	loadKeywords();
+
+	
 
 	/*chrome.storage.sync.get("keys", function(a){
 		console.log("This could work if I say" + " " + a.keys[0].key);
@@ -98,6 +93,22 @@ document.addEventListener("DOMContentLoaded", function(){
 			addKeyword();
 		}
 	});
+
+	document.getElementById("main").addEventListener("click", function(){
+		for(var k = 0; k < keywordContainer.length; ++k)
+		{
+			document.getElementById("word" + k).addEventListener("click", function(){
+				chrome.storage.sync.get("keys", function(a){
+					var temp = a.keys;
+					if(document.getElementById("word" + k).checked){
+						temp[k].check = "true";
+					}
+					else temp[k].check = "false";
+					chrome.storage.sync.set({keys:temp});
+				});
+			});
+		}
+	})
 
 	document.getElementById("clear").addEventListener("click", function(){
 		keywordContainer = [];

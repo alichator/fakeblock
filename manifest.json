@@ -5,7 +5,8 @@
   "version": "1.0",
   "permissions": [
     "webNavigation",
-    "storage"
+    "storage",
+    "tabs"
   ],
   "icons": {
   	"16": "Filter2.png",

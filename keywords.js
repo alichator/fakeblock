@@ -32,6 +32,8 @@ function addKeyword() {
 
 	document.getElementById("main").appendChild(span);
 	document.getElementById("main").appendChild(document.createElement("br"));
+
+	chrome.extension.sendMessage({filter:span.innerText});
 }
 
 function loadKeywords() {
@@ -64,12 +66,26 @@ document.addEventListener("DOMContentLoaded", function(){
 
 	document.getElementById("sbox").addEventListener("click", function(){
 		addKeyword();
+		chrome.storage.sync.get("keys", function(a){
+		    for(var i=0; i<a.keys.length; i++){
+		        if(a.keys[i].check == "t"){
+		         	chrome.extension.sendMessage({filter:a.keys[i].key});
+		        }
+		    }
+        });
 	});
 
 	document.getElementById("key").addEventListener("keypress", function(){
 		if(event.keyCode == 13)
 		{
 			addKeyword();
+			chrome.storage.sync.get("keys", function(a){
+			    for(var i=0; i<a.keys.length; i++){
+			        if(a.keys[i].check == "t"){
+			         	chrome.extension.sendMessage({filter:a.keys[i].key});
+			        }
+			    }
+	        });
 		}
 	});
 
@@ -81,6 +97,14 @@ document.addEventListener("DOMContentLoaded", function(){
 			if(allChecks[k].checked == false) keywordContainer[k].check = "f";
 		}
 		chrome.storage.sync.set({keys:keywordContainer});
+
+		chrome.storage.sync.get("keys", function(a){
+		    for(var i=0; i<a.keys.length; i++){
+		        if(a.keys[i].check == "t"){
+		         	chrome.extension.sendMessage({filter:a.keys[i].key});
+		        }
+		    }
+        });
 	});
 
 	document.getElementById("clear").addEventListener("click", function(){
@@ -92,25 +116,4 @@ document.addEventListener("DOMContentLoaded", function(){
 		location.reload();
 	});
 
-	document.body.addEventListener("click", function(){
-		chrome.storage.sync.get("keys", function(a){
-		    for(var i=0; i<a.keys.length; i++){
-		        if(a.keys[i].check == "t"){
-		         	chrome.extension.sendMessage({filter:a.keys[i].key});
-		        }
-		    }
-        });
-	});
-
-	document.getElementById("inputbox").addEventListener("keypress", function(){
-		if(event.keyCode == 13){	
-			chrome.storage.sync.get("keys", function(a){
-			    for(var i=0; i<a.keys.length; i++){
-			        if(a.keys[i].check == "t"){
-			         	chrome.extension.sendMessage({filter:a.keys[i].key});
-			        }
-			    }
-	        });
-	    }
-	});
 });

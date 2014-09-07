@@ -12,29 +12,29 @@
 	
 // };
 
-var keywordContainer = ["hello"];
+var keywordContainer = [];
 
 function addKeyword() {
 
 	var filter = document.createElement("input");
 	filter.setAttribute("type", "checkbox");
 	filter.setAttribute("checked", "true");
-	filter.setAttribute("name", document.getElementById("key").value);
+	filter.setAttribute("value", document.getElementById("key").value);
 	
-	chrome.storage.local.get("keywords", function(keywords){
+	chrome.storage.sync.get("keywords", function(keywords){
 		filter.setAttribute("id", "word" + keywords.length);
 	});
 
-	document.getElementById("main").appendChild(filter);
+	//document.getElementById("main").innerHTML += "<input type='checkbox' checked='true' value=" + document.getElementById("key").value + "/>";
 
-	chrome.storage.local.get("keywords", function(keywords) {
+	chrome.storage.sync.get("keywords", function(keywords) {
 		keywords[keywords.length] = filter;
 	})
 }
 
 function loadKeywords() {
 
-	chrome.storage.local.get("keywords", function (keywords) {
+	chrome.storage.sync.get("keywords", function(keywords) {
 		for(var i = 0; i < keywords.length; ++i)
 		{
 			document.getElementById("main").appendChild(keywords[i]);
@@ -45,17 +45,23 @@ function loadKeywords() {
 
 document.addEventListener("DOMContentLoaded", function(){
 	
-	chrome.storage.local.set({"keywords": "hello"});
-	//loadKeywords();
-
-	chrome.storage.local.get("keywords", function(a){
-		window.alert("keywords" + a);
+	chrome.storage.sync.set({"keywords": keywordContainer}, function(){
+		console.log("word" + 3);
 	});
 
+	//loadKeywords();
 
-	// document.getElementById("inputbox").addEventListener("submit", function(){
-	// 	addKeyword();
+	document.getElementById("inputbox").addEventListener("submit", function(){
+	 	//addKeyword();
 	// 	loadKeywords();
-	// });
+	});
+
+	document.getElementById("key").addEventListener("keypress"), function(){
+		if(event.keyCode == 13)
+		{
+			//addKeyword();
+			window.alert("We good.");
+		}
+	}
 
 });

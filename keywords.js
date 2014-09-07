@@ -12,13 +12,6 @@
 	
 // };
 var keywordContainer = [];
-chrome.storage.sync.get("keys", function(a) {
-	keywordContainer = a.keys;
-});
-
-for(var j=0; j>keywordContainer.length; j++) {
-	window.alert(keywordContainer[0].key)
-}
 
 function addKeyword() {
 
@@ -37,21 +30,20 @@ function addKeyword() {
 	}
 	document.getElementById("key").value = "";
 	
+	var repeat = false;
 	chrome.storage.sync.get("keys", function(a){
 		span.setAttribute("id", "word" + a.keys.length);
 		keywordContainer = a.keys;
-	});
+		keywordContainer.push({"key":span.innerText});
 
-	keywordContainer.push({"key":span.innerText});
-	console.log(keywordContainer);
+		chrome.storage.sync.set({
+			keys:keywordContainer
+		});
 
-	chrome.storage.sync.set({
-		keys:keywordContainer
-	}, function(){
-		console.log(keywordContainer);
 	});
 
 	document.getElementById("main").appendChild(span);
+	document.getElementById("main").appendChild(document.createElement("br"));
 }
 
 function loadKeywords() {
@@ -65,6 +57,7 @@ function loadKeywords() {
 			span.appendChild(check);
 			span.innerHTML += a.keys[i].key;
 			document.getElementById("main").appendChild(span);
+			document.getElementById("main").appendChild(document.createElement("br"));
 		}
 	});
 }
@@ -84,6 +77,9 @@ document.addEventListener("DOMContentLoaded", function(){
 	// 	{"key":"test"},
 	// 	{"key":"test2"}
 	// ];
+	chrome.storage.sync.get("keys", function(a) {
+		keywordContainer = a.keys;
+	});
 
 	loadKeywords();
 
@@ -96,12 +92,20 @@ document.addEventListener("DOMContentLoaded", function(){
 		addKeyword();
 	});
 
+	document.getElementById("key").addEventListener("keypress", function(){
+		if(event.keyCode == 13)
+		{
+			addKeyword();
+		}
+	});
+
 	document.getElementById("clear").addEventListener("click", function(){
 		keywordContainer = [];
 		chrome.storage.sync.set({
 			keys:keywordContainer
 		});
 		loadKeywords();
+		location.reload();
 	});
 
 });

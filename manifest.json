@@ -6,8 +6,12 @@
   "permissions": [
     "webNavigation"
   ],
+  "icons": {
+  	"16": "Filter2.png",
+  	"48": "Filter.png"
+  },
   "browser_action": {
-    "default_icon": "icon.png",
+    "default_icon": "Filter2.png",
     "default_popup": "popup.html"
   },
   "background": {

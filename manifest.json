@@ -1,10 +1,11 @@
 {
   "name": "FakeBlock!",
-  "description": "Block Facebook posts by keyword",
+  "description": "Block Twitter posts by keyword",
   "manifest_version": 2,
   "version": "1.0",
   "permissions": [
-    "webNavigation"
+    "webNavigation",
+    "storage"
   ],
   "icons": {
   	"16": "Filter2.png",
@@ -20,7 +21,7 @@
   },
   "content_scripts": [
     { 
-      "matches": ["*://www.facebook.com/*"],
+      "matches": ["*://twitter.com/*"],
       "js": ["jquery-2.1.1.js", "fakeblock.js"]
     }
   ]

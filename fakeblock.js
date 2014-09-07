@@ -1,4 +1,7 @@
 $(document).ready(function(){
-   $('#stream_pagelet div div div div div div').remove();
+    setInterval(function () {
+        
+        $('#stream-items-id > li:contains("hate")').remove()
+    }, 500);
 });
 

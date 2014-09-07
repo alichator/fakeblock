@@ -5,14 +5,7 @@ function addKeyword() {
 	var check = document.createElement("input");
 	check.setAttribute("type", "checkbox");
 	check.setAttribute("checked", true);
-	// check.addEventListener("click", function(){
-	// 	var temp = a.keys;
-	// 	if(check.checked){
-	// 		temp[i].check = "true";
-	// 	}
-	// 	else temp[i].check = "false";
-	// 	chrome.storage.sync.set({keys:temp});
-	// });
+	check.setAttribute("class", "checkKey");
 	var span = document.createElement("span");
 	span.appendChild(check);
 	if(document.getElementById("key").value != "")
@@ -48,16 +41,9 @@ function loadKeywords() {
 			var check = document.createElement("input");
 			check.setAttribute("type", "checkbox");
 			check.setAttribute("id", "word" + i);
+			check.setAttribute("class", "checkKey");
 			check.setAttribute("value", a.keys[i].key);
-			// check.addEventListener("click", function(){
-			// 	var temp = a.keys;
-			// 	if(check.checked){
-			// 		temp[i].check = "true";
-			// 	}
-			// 	else temp[i].check = "false";
-			// 	chrome.storage.sync.set({keys:temp});
-			// });
-			if(a.keys[i].check == "true"){
+			if(a.keys[i].check == "t"){
 				check.setAttribute("checked", true);
 			}
 			span.appendChild(check);
@@ -77,13 +63,6 @@ document.addEventListener("DOMContentLoaded", function(){
 
 	loadKeywords();
 
-	
-
-	/*chrome.storage.sync.get("keys", function(a){
-		console.log("This could work if I say" + " " + a.keys[0].key);
-	});*/
-
-
 	document.getElementById("sbox").addEventListener("click", function(){
 		addKeyword();
 	});
@@ -96,21 +75,14 @@ document.addEventListener("DOMContentLoaded", function(){
 	});
 
 	document.getElementById("main").addEventListener("click", function(){
+		var allChecks = document.getElementsByClassName("checkKey");
 		for(var k = 0; k < keywordContainer.length; ++k)
 		{
-			document.getElementById("word" + k).addEventListener("click", function(){
-				chrome.storage.sync.get("keys", function(a){
-					var temp = a.keys;
-					console.log(document.getElementById("word" + k));
-					if(document.getElementById("word" + k).checked){
-						temp[k].check = "true";
-					}
-					else temp[k].check = "false";
-					chrome.storage.sync.set({keys:temp});
-				});
-			});
+			if(allChecks[k].checked == true) keywordContainer[k].check = "t";
+			if(allChecks[k].checked == false) keywordContainer[k].check = "f";
 		}
-	})
+		chrome.storage.sync.set({keys:keywordContainer});
+	});
 
 	document.getElementById("clear").addEventListener("click", function(){
 		keywordContainer = [];

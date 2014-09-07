@@ -93,7 +93,24 @@ document.addEventListener("DOMContentLoaded", function(){
 	});
 
 	document.body.addEventListener("click", function(){
-		chrome.extension.sendMessage({filter:"filter"});
+		chrome.storage.sync.get("keys", function(a){
+		    for(var i=0; i<a.keys.length; i++){
+		        if(a.keys[i].check == "t"){
+		         	chrome.extension.sendMessage({filter:a.keys[i].key});
+		        }
+		    }
+        });
 	});
 
+	document.getElementById("inputbox").addEventListener("keypress", function(){
+		if(event.keyCode == 13){	
+			chrome.storage.sync.get("keys", function(a){
+			    for(var i=0; i<a.keys.length; i++){
+			        if(a.keys[i].check == "t"){
+			         	chrome.extension.sendMessage({filter:a.keys[i].key});
+			        }
+			    }
+	        });
+	    }
+	});
 });

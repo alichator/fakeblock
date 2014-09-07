@@ -30,7 +30,7 @@ function addKeyword() {
 		span.setAttribute("id", "word" + a.keys.length);
 		keywordContainer = a.keys;
 		keywordContainer.push({"key":span.innerText,
-								"check":"true"});
+								"check":"t"});
 		chrome.storage.sync.set({
 			keys:keywordContainer
 		});
@@ -101,6 +101,7 @@ document.addEventListener("DOMContentLoaded", function(){
 			document.getElementById("word" + k).addEventListener("click", function(){
 				chrome.storage.sync.get("keys", function(a){
 					var temp = a.keys;
+					console.log(document.getElementById("word" + k));
 					if(document.getElementById("word" + k).checked){
 						temp[k].check = "true";
 					}

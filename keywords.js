@@ -33,7 +33,7 @@ function addKeyword() {
 	document.getElementById("main").appendChild(span);
 	document.getElementById("main").appendChild(document.createElement("br"));
 
-	chrome.extension.sendMessage({filter:span.innerText});
+	chrome.extension.sendMessage({filter:span.innerText, check: "t"});
 }
 
 function loadKeywords() {
@@ -68,9 +68,7 @@ document.addEventListener("DOMContentLoaded", function(){
 		addKeyword();
 		chrome.storage.sync.get("keys", function(a){
 		    for(var i=0; i<a.keys.length; i++){
-		        if(a.keys[i].check == "t"){
-		         	chrome.extension.sendMessage({filter:a.keys[i].key});
-		        }
+		        chrome.extension.sendMessage({filter:a.keys[i].key, check: a.keys[i].check});
 		    }
         });
 	});
@@ -81,10 +79,8 @@ document.addEventListener("DOMContentLoaded", function(){
 			addKeyword();
 			chrome.storage.sync.get("keys", function(a){
 			    for(var i=0; i<a.keys.length; i++){
-			        if(a.keys[i].check == "t"){
-			         	chrome.extension.sendMessage({filter:a.keys[i].key});
-			        }
-			    }
+		        	chrome.extension.sendMessage({filter:a.keys[i].key, check: a.keys[i].check});
+		    	}
 	        });
 		}
 	});
@@ -100,9 +96,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
 		chrome.storage.sync.get("keys", function(a){
 		    for(var i=0; i<a.keys.length; i++){
-		        if(a.keys[i].check == "t"){
-		         	chrome.extension.sendMessage({filter:a.keys[i].key});
-		        }
+		        chrome.extension.sendMessage({filter:a.keys[i].key, check: a.keys[i].check});
 		    }
         });
 	});
@@ -113,6 +107,9 @@ document.addEventListener("DOMContentLoaded", function(){
 			keys:keywordContainer
 		});
 		loadKeywords();
+
+		chrome.extension.sendMessage({clear: "clear"});
+
 		location.reload();
 	});
 

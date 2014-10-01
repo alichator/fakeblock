@@ -1,9 +1,5 @@
 fakeblock
 =========
-Rishi was hurrr
-Prepare
-hey
-
 To do:
 
 - Fix rules trying to block and show same tweet
